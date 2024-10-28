@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steamer</title>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="App">
+
+    </div>
+    
+    <script>
+        let js_uri = "/app.js"
+        let css_uri = "/app.css"
+        let css_body = ""
+        let js_body = ""
+
+        if (window.location.protocol === "https:") {
+            js_uri = "/app.js.gz"
+            css_uri = "/app.css.gz"
+        }
+
+        async function loadCss() {
+            let response = await fetch(css_uri, {
+                headers: {
+                    "Accept-Encoding": "gzip"
+                }
+            })
+            css_body = await response.text()
+        }
+        console.log("Loading CSS")
+        loadCss().then(() => {
+            let style = document.createElement("style")
+            style.innerHTML = css_body
+            document.head.appendChild(style)
+        })
+
+        async function loadJs() {
+            let response = await fetch(js_uri, {
+                headers: {
+                    "Accept-Encoding": "gzip"
+                }
+            })
+            js_body = await response.text()
+        }
+        console.log("Loading JS")
+        loadJs().then(() => {
+            let script = document.createElement("script")
+            script.innerHTML = js_body
+            document.body.appendChild(script)
+        })
+        
+    </script>
+</body>
+</html>

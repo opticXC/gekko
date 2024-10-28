@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.app {
+  @apply flex flex-col items-center justify-center min-h-screen bg-gray-100;
+  gap: theme(spacing.4);
+  padding: theme(spacing.4);
+}
+
+.field-inp-btn {
+  @apply flex flex-col items-center justify-center;
+}
+
+.field-inp-btn input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg;
+}
+
+.field-inp-btn button {
+  @apply w-full px-3 py-2 mt-2 text-white bg-blue-500 rounded-lg;
+}
+
+.card-list {
+  @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  max-width: theme(spacing.96);
+}
+
+.card {
+  @apply bg-white shadow-md rounded-lg overflow-hidden;
+  padding: theme(spacing.4);
+  transition: transform 0.3s;
+  animation: fadeIn 0.5s;
+}
+
+.card-active {
+  @apply bg-blue-500 shadow-md rounded-lg overflow-hidden;
+  padding: theme(spacing.4);
+  transition: transform 0.3s;
+  animation: fadeIn 0.5s;
+}
+
+.card:hover {
+  @apply shadow-lg;
+  transform: scale(1.15);
+}
+
+.card-active:hover {
+  @apply shadow-lg;
+  transform: scale(1.15);
+}
+
+.card img {
+  @apply w-full h-48 object-cover;
+}
+
+.card-active img {
+  @apply w-full h-48 object-cover;
+}
+
+.card h2 {
+  @apply text-lg font-semibold text-gray-800;
+}
+
+.card-active h2 {
+  @apply text-lg font-semibold text-white;
+}
+
+.card p {
+  @apply text-gray-600;
+}
+
+.card-active p {
+  @apply text-white;
+}

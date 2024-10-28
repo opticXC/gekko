@@ -1,0 +1,33 @@
+#! /usr/bin/bash
+
+PKG_MANAGER="bun"
+BUNDLER_BUILD_COMMAND="bun build"
+
+TMP_DIR="/tmp/build-web"
+mkdir -p $TMP_DIR
+
+GZIP_FLAGS="--best"
+
+
+echo "Installing dependencies..."
+$PKG_MANAGER install
+
+echo "Compiling TSX files..."
+$BUNDLER_BUILD_COMMAND web/index.tsx --outfile $TMP_DIR/index.js
+echo "Minifying JS files..."
+$PKG_MANAGER run terser $TMP_DIR/index.js --output $TMP_DIR/app.js --compress --mangle
+echo "GZIPing JS files..."
+gzip $GZIP_FLAGS -c $TMP_DIR/app.js > $TMP_DIR/app.js.gz
+
+echo "Compiling CSS files..."
+$PKG_MANAGER run tailwindcss build -i web/styles/index.css -o $TMP_DIR/app.css
+echo "GZIPing CSS files..."
+gzip $GZIP_FLAGS -c $TMP_DIR/app.css > $TMP_DIR/app.css.gz
+
+
+echo "Copying zips"
+cp $TMP_DIR/app.js.gz static/app.js.gz
+cp $TMP_DIR/app.css.gz static/app.css.gz
+
+echo "Cleaning up..."
+rm -r $TMP_DIR
