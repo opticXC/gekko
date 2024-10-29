@@ -1,15 +1,27 @@
-# web_rs
+# Gekko (Name WIP)
 
-To install dependencies:
+A template repository for a [Rocket.rs](https://rocket.rs/) + [React](https://reactjs.org/) web application.
 
-```bash
-bun install
-```
+## Getting Started
 
-To run:
+Please Fork the repository and clone it to your local machine before proceeding.
 
-```bash
-bun run index.ts
-```
+### Prerequisites
+> - [Rust](https://www.rust-lang.org/tools/install)
+> - A JS Bundler (e.g. [Bunjs](https://bun.sh/))
 
-This project was created using `bun init` in bun v1.1.30. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+### Instructions
+> 1. Install the Rust dependencies:
+> run `cargo fetch` in the root directory.
+> 2. Install the JS dependencies:
+> run `npm/yarn/bun install` in the `web` directory.
+> 3. Build the JS bundle:
+> run `npm/yarn/bun run compile` in the `web` directory.
+> 4. Run the application:
+> run `cargo run` in the root directory.
+
+for release builds, run the `scripts/build-web` script in the root directory.
+and then run the `cargo run --release` command in the root directory.
+
+## License
+MIT 
